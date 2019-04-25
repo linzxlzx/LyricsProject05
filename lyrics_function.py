@@ -6,27 +6,11 @@ Created on Sun Apr  7 12:27:52 2019
 @author: zixuan_leah
 """
 
-from load_v9 import *
-# lyrics = read_lyrics("Lyrics.zip")
-# details = get_details(names_list)
-
-#names_list, song_lyrics = read_lyrics(lyric_path)
-#song_details = get_details(names_list, song_lyrics)
-
-# names_list = []  # the list of song names from zip file
-# song_lyrics = {}  # txtname as key, lyrics lists as value
-# song_details = {}  # txtname as key, song details as value
-
-love_dic = {}  # what we will return in love method: song as key, rate as value
-kidsafe_dic = {}  # what we will retrun in kidsafe method
-length_dic = {}
-sent_dic = {}
-com_dic = {}
-#print(a)
-#print(names_list)
+import operator
+import pandas as pd
 
 
-#define a function to save a list of positive and negative word
+# define a function to save a list of positive and negative word
 def get_pos_neg_words():
     def get_words(url):
         import requests
@@ -131,7 +115,6 @@ def result_rank(sentiment, love, kid_safe, length, complexity):
     result_rank_kid = kid_safe
     result_rank_len = length
     result_rank_comp = complexity
-    import operator
     sorted_rank_sen = dict(sorted(result_rank_sen.items(),
                                   key=operator.itemgetter(1), reverse=True))
     sorted_rank_love = dict(sorted(result_rank_love.items(),
@@ -142,7 +125,6 @@ def result_rank(sentiment, love, kid_safe, length, complexity):
                                   key=operator.itemgetter(1), reverse=True))
     sorted_rank_comp = dict(sorted(result_rank_comp.items(),
                                    key=operator.itemgetter(1), reverse=True))
-    import pandas as pd
     results = pd.DataFrame.from_dict([sorted_rank_sen, sorted_rank_love,
                                       sorted_rank_kid, sorted_rank_len,
                                       sorted_rank_comp]).T
