@@ -15,24 +15,12 @@ from nltk.corpus import stopwords
 from nltk.corpus import wordnet
 
 
-names_list = []  # the list of song names from zip file
-song_lyrics = {}  # txtname as key, lyrics lists as value
-song_details = {}  # txtname as key, song details as value
-
-#lyric_path = "Lyrics"  
-# change into argparse
-#lyric_path = sys.argv[1]  
-
 # return the songname and lyric words as a dic
 def read_lyrics(path: str) -> dict:
-#    for file in glob.glob(path):
-#        names_list.append(file) 
     lyrics = {}
     names = os.listdir(path)
-#    print(names_list)
     for songtxt in names:
-        with open(path + "/" + songtxt) as lyrics_context:
-            
+        with open(path + "/" + songtxt) as lyrics_context:         
             text = ''
             for sentence in lyrics_context.readlines():  # split into sentences
                 text += sentence.strip("\r\n")+" "
@@ -46,16 +34,11 @@ def read_lyrics(path: str) -> dict:
                                         or char == "*"
                                         or char == "-")])
                 if not (word_adj == '' or word_adj == "-" or word_adj == "'"):
-                    if "-" in word_adj:  # split "Rang-dang-diggidy-dang-a-dang"
+                    if "-" in word_adj:  # split "Rang-dang-digidy-dang-a-dang"
                         sub_words = word_adj.split("-")
                         word_list.extend(sub_words)
                     else:
                         word_list.append(word_adj)
-# =============================================================================
-#             stemmer = SnowballStemmer("english")  # get stems of the words
-#             words[letters_in] = stemmer.stem(word_adj)
-#
-# =============================================================================
             lyrics[songtxt] = word_list  # put songname and lyrics in dic
 
     return names, lyrics  # return a dic
@@ -99,21 +82,3 @@ def get_details(namelist: list, lyricdic: dict) -> dict:
         song_de.append(detect_res)  # also append the language result
         song_details[txtname] = song_de
     return song_details
-
-
-# =============================================================================
-# things left:
-#     chorus x7 e.g. 142
-#     in'
-# =============================================================================
-
-#names_list, song_lyrics = read_lyrics(lyric_path)
-#song_details = get_details(names_list, song_lyrics)
-#    print(song_details)
-
-#print(set(stopwords.words('english')))
-
-#names_list = []  # the list of song names from zip file
-#song_lyrics = {}  # txtname as key, lyrics lists as value
-#song_details = {}  # txtname as key, song details as value
-
