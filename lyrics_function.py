@@ -157,7 +157,7 @@ def result_rank(sentiment, love, kid_safe, length, complexity):
                                 labels=False, duplicates='drop')
     results['complexity'] = pd.qcut(results['complexity'], 11,
                                     labels=False, duplicates='drop')
-    return results
+    return results.applymap(lambda x: x/10)
 
 
 def create_song_details_dic(song_details):
