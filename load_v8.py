@@ -21,7 +21,7 @@ song_details = {}  # txtname as key, song details as value
 
 #lyric_path = "Lyrics"  
 # change into argparse
-lyric_path = sys.argv[1]  
+#lyric_path = sys.argv[1]  
 
 # return the songname and lyric words as a dic
 def read_lyrics(path: str) -> dict:
@@ -107,8 +107,8 @@ def get_details(namelist: list, lyricdic: dict) -> dict:
 #     in'
 # =============================================================================
 
-names_list, song_lyrics = read_lyrics(lyric_path)
-song_details = get_details(names_list, song_lyrics)
+#names_list, song_lyrics = read_lyrics(lyric_path)
+#song_details = get_details(names_list, song_lyrics)
 #    print(song_details)
 
 #print(set(stopwords.words('english')))
