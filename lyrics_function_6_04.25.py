@@ -6,7 +6,7 @@ Created on Sun Apr  7 12:27:52 2019
 @author: zixuan_leah
 """
 
-from load_v8 import *
+from load_v9 import *
 # lyrics = read_lyrics("Lyrics.zip")
 # details = get_details(names_list)
 
@@ -38,41 +38,39 @@ def get_pos_neg_words():
             if ';' in word or not word:
                 word_list.pop(index)
             else:
-                index+=1
+                index += 1
         return word_list
 
     p_url = 'http://ptrckprry.com/course/ssd/data/positive-words.txt'
     n_url = 'http://ptrckprry.com/course/ssd/data/negative-words.txt'
     positive_words = get_words(p_url)
     negative_words = get_words(n_url)
-    return positive_words,negative_words
+    return positive_words, negative_words
 
 
-#define a function to return a list of the percentage of positive word and negative word for each song
-def sentiment(songnames: list):
-    positive_words,negative_words = get_pos_neg_words()
+# define a function to return a list of the percentage of positive word
+# and negative word for each song
+def sentiment(songnames: list, lyrics: dict) -> dict:
+    positive_words, negative_words = get_pos_neg_words()
     results = list()
     for song in songnames:
         cpos = cneg = 0
-        for word in song_lyrics[song]:
+        for word in lyrics[song]:
             if word in positive_words:
-                cpos+=1
+                cpos += 1
             if word in negative_words:
-                cneg+=1
-        results.append((song,cpos/len(song_lyrics.get(song))-cneg/len(song_lyrics.get(song))))
-        result={song[0]:song[1] for song in results}
+                cneg += 1
+        results.append((song, cpos/len(lyrics.get(song))
+                        - cneg/len(lyrics.get(song))))
+        result = {song[0]: song[1] for song in results}
     return result
 
 
-
-
-
-
-def love(songnames: list, lovelist: list) -> dict:
-    lo_dic = {}    
+def love(songnames: list, lovelist: list, lyrics: dict) -> dict:
+    lo_dic = {}
     for name in songnames:
         match_love = 0
-        lovetext = song_lyrics[name]
+        lovetext = lyrics[name]
         for word in lovetext:
             if word in lovelist:
                 match_love += 1
@@ -81,11 +79,11 @@ def love(songnames: list, lovelist: list) -> dict:
     return lo_dic
 
 
-def kid_safe(songnames: list, dirtylist: list, sent_rsl: dict) -> dict:
+def kid_safe(songnames, dirtylist: list, sent_rsl, lyrics: dict) -> dict:
     k_dic = {}
     for name in songnames:
         match_dirty = 0
-        dirtytext = song_lyrics[name]
+        dirtytext = lyrics[name]
         for word in dirtytext:
             if (word in dirtylist) or ("*" in word):
                 match_dirty += 1
@@ -94,44 +92,39 @@ def kid_safe(songnames: list, dirtylist: list, sent_rsl: dict) -> dict:
         kidsafe_rate = 0.7 * (1 - dirty_rate) + 0.3 * sent_rate
         k_dic[name] = kidsafe_rate
     return k_dic
-#print(kid_safe(names_list,"dirty_words.txt"))
 
 
-def length(songnames: list) -> dict:
+def length(songnames: list, lyrics: dict) -> dict:
     len_dic = {}
     for name in songnames:
-        length = len(song_lyrics[name])
+        length = len(lyrics[name])
         len_dic[name] = length
     return len_dic
-#print(length(names_list))
-    
-def complexity(songnames: list) -> dict:
+
+
+def complexity(songnames: list, lyrics: dict) -> dict:
     com_dic = {}
     for name in songnames:
-        com = len(set(song_lyrics[name]))
+        com = len(set(lyrics[name]))
         com_dic[name] = com
     return com_dic
-# =============================================================================
-# re here
-# =============================================================================
-def read_txt(filename):
+
+
+def read_txt(filename: str) -> list:
     with open(filename, "r") as file:
         wl_1 = file.readlines()
         wl = []
         for words in wl_1:
             wl.append(words.strip("\n"))
     return wl
-#print(read_txt("love_words.txt"))
-    
-
 
 
 # =============================================================================
 # ranking
 # =============================================================================
-    
 
-#separate the result into two list with sorted rank
+
+# separate the result into two list with sorted rank
 def result_rank(sentiment, love, kid_safe, length, complexity):
     result_rank_sen = sentiment
     result_rank_love = love
@@ -173,36 +166,3 @@ def create_song_details_dic(song_details):
     song_info.columns = ['id', 'artist', 'title', 'ENG']
     song_info.drop('ENG', axis=1, inplace=True)
     return song_info
-
-
-
-
-
-love_l = read_txt("love_words.txt")
-dir_l = read_txt("dirty_words.txt")
-sent_dic = sentiment(names_list)
-kidsafe_dic = kid_safe(names_list, dir_l, sent_dic)
-#print(kidsafe_dic)
-love_dic = love(names_list, love_l)
-length_dic = length(names_list)
-
-com_dic = complexity(names_list)
-
-#print(kidsafe_dic)
-
-#print("123")
-#finalresult=result_rank(sent_dic, love_dic, kidsafe_dic, length_dic, com_dic).T.to_dict()
-#print(finalresult)
-##finalresult.update(song_template)
-import pandas as pd
-result_0 = create_song_details_dic(song_details).join(result_rank(sentiment, love, kid_safe, length, complexity))
-result_1 = list()
-for song in names_list:
-    result_1.append(result_0.T.to_dict()[song])
-    
-finalresult={"characterizations":result_1}
-import json
-dump = json.dump(finalresult, sys.stdout, indent = 4)
-#print(dump)
-#loaded_results = json.loads(dump)
-#print(loaded_results)
