@@ -167,6 +167,12 @@ def result_rank(sentiment, love, kid_safe, length, complexity):
     return results
 
 
+def create_song_details_dic(song_details):
+    import pandas as pd
+    song_info = pd.DataFrame.from_dict(song_details).T
+    song_info.columns = ['id', 'artist', 'title', 'ENG']
+    song_info.drop('ENG', axis=1, inplace=True)
+    return song_info
 
 
 
@@ -185,9 +191,16 @@ com_dic = complexity(names_list)
 #print(kidsafe_dic)
 
 #print("123")
-finalresult=result_rank(sent_dic, love_dic, kidsafe_dic, length_dic, com_dic).T.to_dict()
+#finalresult=result_rank(sent_dic, love_dic, kidsafe_dic, length_dic, com_dic).T.to_dict()
 #print(finalresult)
 ##finalresult.update(song_template)
+import pandas as pd
+result_0 = create_song_details_dic(song_details).join(result_rank(sentiment, love, kid_safe, length, complexity))
+result_1 = list()
+for song in names_list:
+    result_1.append(result_0.T.to_dict()[song])
+    
+finalresult={"characterizations":result_1}
 import json
 dump = json.dump(finalresult, sys.stdout, indent = 4)
 #print(dump)
