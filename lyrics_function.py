@@ -8,6 +8,8 @@ Created on Sun Apr  7 12:27:52 2019
 
 import operator
 import pandas as pd
+import collections
+import numpy as np
 
 
 # define a function to save a list of positive and negative word
@@ -89,8 +91,11 @@ def length(songnames: list, lyrics: dict) -> dict:
 def complexity(songnames: list, lyrics: dict) -> dict:
     com_dic = {}
     for name in songnames:
-        com = len(set(lyrics[name]))
-        com_dic[name] = com
+        lyric = lyrics[name]
+        counter = collections.Counter(lyric)
+        pi = np.array([x/len(lyric) for x in counter.values()])
+        log2pi = np.array([np.log2(1/x) for x in pi])
+        com_dic[name] = np.sum(pi*log2pi)
     return com_dic
 
 
@@ -143,8 +148,6 @@ def result_rank(sentiment, love, kid_safe, length, complexity):
 
 
 def create_song_details_dic(song_details):
-    import pandas as pd
     song_info = pd.DataFrame.from_dict(song_details).T
     song_info.columns = ['id', 'artist', 'title', 'ENG']
-    song_info.drop('ENG', axis=1, inplace=True)
     return song_info
