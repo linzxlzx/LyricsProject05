@@ -1,32 +1,32 @@
 # LyricsProject05
 This is the Lyrics Rating Project submitted by Ge Tian(gt2408) and Zixuan Lin(zl2725) from group Project 5.
 
-##Installation
+## Installation
 To run the main functions for lyrics rating, you need to install the nltk package with pip:
 ```
 pip install nltk
 ```
 
-##Introduction
+## Introduction
 ...The project is designed for .....
 ....
 
 
-##Characterization
+## Characterization
 We rate the song lyrics from the following five dimensions and output the rating of each song as a json output.
 
-###love
+### love
 
-###mood
+### mood
 
-###kidsafe
+### kidsafe
 
-###length
+### length
 
-###complexity
+### complexity
 
 
-##Output
+## Output
 We will have the jason output has the following format:
 ```
 {
