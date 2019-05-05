@@ -24,6 +24,7 @@ We rate the song lyrics from the following five dimensions and output the rating
 ### length
 
 ### complexity
+![equation](https://latex.codecogs.com/gif.latex?Comp_%7Bs%7D%3D%20-%5Csum_%7Bi%7D%5E%7BN%7DP_%7Bi%7Dlog_%7B2%7D%7BP_%7Bi%7D%7D)
 
 
 ## Output
