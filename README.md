@@ -1,9 +1,9 @@
 # LyricsProject05
-<img src="http://s5304.pcdn.co/guides/wp-content/uploads/cache/2017/12/Holiday_Song_Lyrics/2789392564.jpg" width="800" height="20"/>
+<img src="http://s5304.pcdn.co/guides/wp-content/uploads/cache/2017/12/Holiday_Song_Lyrics/2789392564.jpg" width="800" height="150"/>  <br /> 
 This is the Lyrics Rating Project submitted by Group **Project 5** for Tools for Analytics taught by Professor Paul Logston.
 Group members are:  <br />
-- **Ge Tian(gt2408)**
-- **Zixuan Lin(zl2725)**
+**Ge Tian(gt2408)** <br />
+**Zixuan Lin(zl2725)** <br />
 
 ## Installation
 To run the main functions for lyrics rating, you need to install the nltk package with pip:
@@ -16,7 +16,7 @@ In order to make the codes run properly, you need to clone the repo and run the 
 $ python main.py \PathtoLyricsFolder
 ```
 Here **\PathtoLyricsFolder** needs to be the path to a folder contains all the lyrics files that we need to rate.  <br /> 
-For each lyrics file, it needs to have the extension of ".txt" and has the standard format as **"/<song id/>~/<song artist/>~/<song title/>.txt"**. Our codes will return the ratings of each song as described in the Output Section below.  <br /> 
+For each lyrics file, it needs to have the extension of ".txt" and has the standard format as **"<song-id\>\~<song-artist\>\~<song-title\>.txt"**. Our codes will return the ratings of each song as described in the Output Section below.  <br /> 
 
 ## Characterization
 We rate the song lyrics with the scale from 0.0 to 1.0 for the following five dimensions and return the rating scores of each song lyrics as a json output.
@@ -49,7 +49,7 @@ The results of each dimension are saved as a dictionary. We sort the results of 
 We also try to detect the song lyrics with foreign language. Take the slangs such as "yo", "umm" that might be detected as non_English, we analyze the first 20 unique words in each song and set the criteria that an English song needs to have more than 70% of its first 20 words detected as English words. If the lyrics of a song is detected as non-English, we will return constant score 0.5 for its kidsafe, love and mood dimensions.  <br />
 
 ## Output
-We will have the json output has the following format:
+We will have the json output with the following format:
 ```
 {
     "characterizations": [
