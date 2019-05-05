@@ -1,5 +1,5 @@
 # LyricsProject05
-![background](http://s5304.pcdn.co/guides/wp-content/uploads/cache/2017/12/Holiday_Song_Lyrics/2789392564.jpg)
+<img src="http://s5304.pcdn.co/guides/wp-content/uploads/cache/2017/12/Holiday_Song_Lyrics/2789392564.jpg" width="525"/>
 This is the Lyrics Rating Project submitted by Group **Project 5** for Tools for Analytics taught by Professor Paul Logston.
 Group members are: 
 - **Ge Tian(gt2408)**
@@ -20,7 +20,7 @@ For the love dimension, we match the lyrics of each song with a list of 262 love
 *Note: Since the wordlist named "love_word.txt" is saved as txt file in our repo. Users have to run the command from the root of our repo to ensure the file could be found.*  <br />
 
 #### **Mood**
-For the mood dimension, we first scrap a [positive wordlist](http://ptrckprry.com/course/ssd/data/positive-words.txt) (2006 unique words) and a [negative wordlist](http://ptrckprry.com/course/ssd/data/negative-words.txt) (4783 unique words) from the website of Patrick O. Perry (add a links), who was an Assistant Professor in the Statistics group at NYU Stern. Then we match the lyrics of each song with the lists to calculate the percentage of positive words and negative words in the length of the song. The mood in our analysis is defined as the difference of the positive and negative percentage. The higher the difference, the happier the song is. 
+For the mood dimension, we first scrap a [positive wordlist](http://ptrckprry.com/course/ssd/data/positive-words.txt) (2006 unique words) and a [negative wordlist](http://ptrckprry.com/course/ssd/data/negative-words.txt) (4783 unique words) from the website of Patrick O. Perry, who was an Assistant Professor in the Statistics group at NYU Stern. Then we match the lyrics of each song with the lists to calculate the percentage of positive words and negative words in the length of the song. The mood in our analysis is defined as the difference of the positive and negative percentage. The higher the difference, the happier the song is. 
  <br />
 #### **Kidsafe**
 For the kidsafe dimension, we use the similar criteria we use for the lovedimension. We match the lyrics of each song with a list of 1648 not-kidsafe words to calculate the percentage of bad words in the length of the song. The lower the percentage, the more kid-safe the song is. Besides, we also inlcude our weighted mood score as an influential factor of the kidsafe dimension based on the reasoning that the song lyrcis with higher negative mood will also be less kid safe.   <br />
