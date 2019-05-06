@@ -42,11 +42,11 @@ We refer to the information entropy concept to define the complexity of each son
  <br />
 Where N is the number of unique words in the song *s* and *i* is the *i-th* unique word. Pi is the probability that the *i-th* word appears in the song *s*.  <br />
 
-### - Rank the Result
+### - Result Ranking
 The results of each dimension are saved as a dictionary. We sort the results of each dimension and rate the songs into 11 levels from 0 to 1 with an increment of 0.1. For example, if we have 1000 songs in database, then we rate the first 1000//11 songs with lowest love percentage as 0.0, the second 1000//11 songs as 0.1, and so forth. We perform the same ranking system to each of the five dimensions.  <br />
 
 ### - Foreign Lyrics
-We also try to detect the song lyrics with foreign language. Take the slangs such as "yo", "umm" that might be detected as non_English, we analyze the first 20 unique words in each song and set the criteria that an English song needs to have more than 70% of its first 20 words detected as English words. If the lyrics of a song is detected as non-English, we will return constant score 0.5 for its kidsafe, love and mood dimensions.  <br />
+We also try to detect the song lyrics with foreign language. Take into consideration the slangs such as "yo", "umm" that might be detected as non-English, we analyze the first 20 unique words in each song and set the criteria that an English song needs to have more than 70% of its first 20 words detected as English words. If the lyrics of a song is detected as non-English, we will return constant score 0.5 for its kidsafe, love and mood dimensions.  <br />
 
 ## Output
 We will have the json output with the following format:
@@ -54,7 +54,7 @@ We will have the json output with the following format:
 {
     "characterizations": [
         {
-            "id": "241",
+            "id": 241,
             "artist": "Connie Francis",
             "title": "I'll Close My Eyes",
             "mood": 0.7,
