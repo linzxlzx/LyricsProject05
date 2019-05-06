@@ -81,7 +81,7 @@ class TestStringMethods(unittest.TestCase):
     def test_lang(self):
         self.assertTrue(mn.load.detect_lang(langset1))
         self.assertFalse(mn.load.detect_lang(langset2))
-        self.assertTrue(mn.load.detect_lang(langset3))   
+        self.assertTrue(mn.load.detect_lang(langset3))
 
     def test_details1(self):
         self.assertEqual(details["271~E-40~Neva-Broke.txt"],
