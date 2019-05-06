@@ -39,6 +39,5 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser('LyricsProject')
     parser.add_argument('lyrics_path', help='Path to the Lyrcis folder')
     args = parser.parse_args()
-
-    lyric_path = args.lyrics_path  
+    lyric_path = args.lyrics_path
     main(lyric_path)
