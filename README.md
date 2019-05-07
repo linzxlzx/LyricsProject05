@@ -57,9 +57,9 @@ We will have the json output with the following format:
             "id": 241,
             "artist": "Connie Francis",
             "title": "I'll Close My Eyes",
-            "mood": 0.7,
+            "kid_safe": 0.4,
             "love": 0.6,
-            "kidsafe": 0.6,
+            "mood": 0.7,
             "length": 0.1,
             "complexity": 0.6
         },
